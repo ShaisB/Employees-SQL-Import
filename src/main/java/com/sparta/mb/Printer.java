@@ -10,8 +10,8 @@ public class Printer {
         System.out.println("There are " + databaseSize + " entries in the database after duplicate removal");
     }
 
-    public static void  databaseWriteTime(int timeTaken){
-        System.out.println("Database written in: " + timeTaken + " seconds");
+    public static void  databaseWriteTime(long timeTaken){
+        System.out.println("Database written in: " + timeTaken + " milliseconds");
     }
 
 }

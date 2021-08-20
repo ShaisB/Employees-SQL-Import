@@ -39,8 +39,6 @@ public class CsvFileReader {
         File file = new File(fileName);
         Scanner scanner = null;
         String[] splitLine = null;
-        int employeeNumber;
-        int salary;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -49,10 +47,7 @@ public class CsvFileReader {
         int i = 0;
         while (scanner.hasNextLine()){
                 splitLine = scanner.nextLine().split(",");
-                //employeeNumber = Integer.parseInt(splitLine[0]);
-                //salary = Integer.parseInt(splitLine[9]);
                 employees.add(new Employee(splitLine[0],splitLine[1],splitLine[2],splitLine[3],splitLine[4],splitLine[5],splitLine[6],splitLine[7],splitLine[8],splitLine[9]));
-                //System.out.println(i);
                 i++;
         }
         scanner.close();

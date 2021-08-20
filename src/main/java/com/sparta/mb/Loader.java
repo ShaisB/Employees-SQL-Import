@@ -23,32 +23,28 @@ public class Loader {
 
         EmployeeDAO employeeDAO = new EmployeeDAO(ConnectionManager.connectToDB());
 
-        int startIndex = 1;
+        employeeDAO.truncate();
 
         int desiredThreads = Scanner.getNumberOfThreads();
 
-        if (desiredThreads == 1) {
-            long startTimeInMs = System.currentTimeMillis();
-            SqlWriter.writeToDatabase(purged, employeeDAO);
-            long timeTakenInMs = System.currentTimeMillis() - startTimeInMs;
-            int timeInSeconds = (int) (timeTakenInMs / 1000);
+        Timer timer = new Timer();
 
-            Printer.databaseWriteTime(timeInSeconds);
+        if (desiredThreads == 1) {
+            long startTimeInMs = timer.startTime();
+            SqlWriter.writeToDatabase(purged, employeeDAO);
+            long timeTaken = timer.timeTaken(startTimeInMs);
+            Printer.databaseWriteTime(timeTaken);
         } else {
 
             ArrayList<List> splitArrays = ArraySplitter.split(purged, desiredThreads - 1);
 
-
-            //checking all the data was successfully divided
-            //some log here
-            long startTimeInMs = System.currentTimeMillis();
+            long startTimeInMs = timer.startTime();
 
             ThreadManager.threadManager(desiredThreads, splitArrays);
 
-            long timeTakenInMs = System.currentTimeMillis() - startTimeInMs;
-            int timeInSeconds = (int) (timeTakenInMs / 1000);
+            long timeTaken = timer.timeTaken(startTimeInMs);
 
-            Printer.databaseWriteTime(timeInSeconds);
+            Printer.databaseWriteTime(timeTaken);
 
 
         }

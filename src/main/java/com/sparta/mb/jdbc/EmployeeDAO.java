@@ -6,10 +6,6 @@ import java.sql.*;
 
 public class EmployeeDAO {
 
-    //create
-    //read
-    //update
-    //delete
 
     private Connection connection;
     private Statement statement;
@@ -22,6 +18,16 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
     }
+
+    public void truncate(){
+        try {
+            statement.execute(SQLQueries.TRUNCATE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void printAllUsers(){
         try {
