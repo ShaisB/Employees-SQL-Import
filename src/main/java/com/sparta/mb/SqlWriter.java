@@ -21,7 +21,6 @@ public class SqlWriter extends Thread{
         int numberOfEmployees = employees.size();
 
         while(i < numberOfEmployees) {
-            //employeeDAO.createRecord(employees.get(i).employeeID, employees.get(i).title, employees.get(i).firstName, employees.get(i).middleInitial, employees.get(i).surname, employees.get(i).gender, employees.get(i).email, employees.get(i).dob, employees.get(i).joined, employees.get(i).salary);
             employeeDAO.createRecord(employees.get(i));
             i++;
         }
@@ -33,6 +32,16 @@ public class SqlWriter extends Thread{
     }
 
     public static void writeToDatabase(List<Employee> employees, EmployeeDAO employeeDAO){
+        int i = 1;
+        int numberOfEmployees = employees.size();
+
+        while(i < numberOfEmployees) {
+            employeeDAO.createRecord(employees.get(i));
+            i++;
+        }
+    }
+
+    public static void writeToDatabase(ArrayList<Employee> employees, EmployeeDAO employeeDAO){
         int i = 1;
         int numberOfEmployees = employees.size();
 
